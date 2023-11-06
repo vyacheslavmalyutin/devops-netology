@@ -9,6 +9,6 @@ First addon
  - любые каталоги `.terraform`, включая их содержимое;
  - файлы, оканчивающиеся на `.tfstate` или содержащие в названии `.tfstate.`;
  - файлы `crash.log` и файлы, начинающиеся на `crash.` и заканчивающиеся на `.log`;
- - файлы, оканчивающиеся на `.tfvars` и `.tfvars.json`;
- - файлы `override.tf` и `override.tf.json`, а также файлы, оканчивающиеся на `_override.tf` и `_override.tf.json`;
- - файлы `.terraformrc` и `terraform.rc`.
+ - файлы, оканчивающиеся на `.tfvars` или `.tfvars.json`;
+ - файлы `override.tf` или `override.tf.json`, а также файлы, оканчивающиеся на `_override.tf` или `_override.tf.json`;
+ - файлы `.terraformrc` или `terraform.rc`.
