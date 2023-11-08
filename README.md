@@ -12,3 +12,4 @@ First addon
  - файлы, оканчивающиеся на `.tfvars` и `.tfvars.json`;
  - файлы `override.tf` и `override.tf.json`, а также файлы, оканчивающиеся на `_override.tf` и `_override.tf.json`;
  - файлы `.terraformrc` и `terraform.rc`.
+new line
