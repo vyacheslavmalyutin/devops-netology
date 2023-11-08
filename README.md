@@ -14,3 +14,4 @@ First addon
  - файлы `.terraformrc` и `terraform.rc`.
 new line
 next line
+another line
