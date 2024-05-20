@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx-multitool
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http-nginx
+        - containerPort: 443
+          name: https-nginx
+      - name: multitool
+        image: wbitt/network-multitool
+        env:
+        - name: HTTP_PORT
+          value: "1180"
+        - name: HTTPS_PORT
+          value: "11443"
+        ports:
+        - containerPort: 1180
+          name: http-multitool
+        - containerPort: 11443
+          name: https-multitool

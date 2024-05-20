@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nginx-dedic
+spec:
+  selector:
+    app: nginx-dedic
+  ports:
+  - name: http-nginx
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https-nginx
+    port: 443
+    protocol: TCP
+    targetPort: 443

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx-dedic
+  labels:
+    app: nginx-dedic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-dedic
+  template:
+    metadata:
+      labels:
+        app: nginx-dedic
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http-nginx
+        - containerPort: 443
+          name: https-nginx
+      initContainers:
+      - name: init-svc-nginx-dedic
+        image: busybox
+        command: ['sh', '-c', "until nslookup svc-nginx-dedic.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for svc-nginx-dedic; sleep 1; done"]
