@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-frontend-nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - name: http-nginx
+    port: 80
+    protocol: TCP
+    targetPort: 80
