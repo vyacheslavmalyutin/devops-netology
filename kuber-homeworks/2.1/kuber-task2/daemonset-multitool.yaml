@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemonset-multitool
+  labels:
+    app: task2
+spec:
+  selector:
+    matchLabels:
+      app: task2
+  template:
+    metadata:
+      labels:
+        app: task2
+    spec:
+      volumes:
+      - name: host-volume
+        hostPath:
+          path: /var/log/boot.log.1
+          type: File
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool
+        ports:
+        - containerPort: 80
+          name: http-multitool
+        - containerPort: 443
+          name: https-multitool
+        volumeMounts:
+        - mountPath: /mnt/host-boot1.log
+          name: host-volume
