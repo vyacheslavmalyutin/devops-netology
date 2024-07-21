@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-busybox-multitool
+  labels:
+    app: task1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task1
+  template:
+    metadata:
+      labels:
+        app: task1
+    spec:
+      volumes:
+      - name: volume-local-node
+        persistentVolumeClaim:
+          claimName: pvc-local
+      containers:
+      - name: busybox
+        image: busybox
+        command:
+          - "sh"
+          - "-c"
+          - "while true; do echo $(date +'%Y-%m-%d %H:%M:%S') 'Busybox alive' >> /outbox/busybox.log && sleep 5; done"
+        volumeMounts:
+        - mountPath: /outbox
+          name: volume-local-node
+      - name: multitool
+        image: wbitt/network-multitool
+        command:
+          - "sh"
+          - "-c"
+          - "while [ ! -f /inbox/busybox.log ]; do sleep 1; done && tail -F /inbox/busybox.log"
+        ports:
+        - containerPort: 80
+          name: http-multitool
+        - containerPort: 443
+          name: https-multitool
+        volumeMounts:
+        - mountPath: /inbox
+          name: volume-local-node
