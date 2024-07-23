@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-mutlitool
+data:
+  multitool-http-port: "10080"
+  multitool-https-port: "10443"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-nginx-multitool
+  labels:
+    app: task1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task1
+  template:
+    metadata:
+      labels:
+        app: task1
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        env:
+        - name: NGINX_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-nginx
+              key: nginx-http-port
+      - name: multitool
+        image: wbitt/network-multitool
+        env:
+        - name: HTTP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-mutlitool
+              key: multitool-http-port
+        - name: HTTPS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: configmap-mutlitool
+              key: multitool-https-port
